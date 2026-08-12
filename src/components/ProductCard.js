@@ -2,7 +2,6 @@ import React from "react";
 import { Card, Button, Badge } from "react-bootstrap";
 
 function ProductCard({ product, onAddToCart }) {
-    // Dynamic color helper for status badges
     const getStatusColor = (status) => {
         switch (status) {
             case "Còn hàng":
@@ -18,7 +17,6 @@ function ProductCard({ product, onAddToCart }) {
         }
     };
 
-    // Format price to VND, e.g. 199.000d
     const formatPriceVND = (price) => {
         return Math.floor(price).toLocaleString("vi-VN") + "d";
     };
@@ -32,7 +30,6 @@ function ProductCard({ product, onAddToCart }) {
                 transition: "transform 0.3s ease, box-shadow 0.3s ease",
             }}
         >
-            {/* Status Tag Overlay */}
             <Badge 
                 bg={getStatusColor(product.status)} 
                 className="position-absolute fs-6 fw-semibold px-3 py-2 m-3 rounded-pill shadow"
@@ -45,7 +42,6 @@ function ProductCard({ product, onAddToCart }) {
                 {product.status}
             </Badge>
 
-            {/* Product Image */}
             <div style={{ height: "260px", overflow: "hidden", backgroundColor: "#f8f9fa", display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <Card.Img 
                     variant="top" 
@@ -62,7 +58,6 @@ function ProductCard({ product, onAddToCart }) {
                 />
             </div>
 
-            {/* Product Info */}
             <Card.Body className="d-flex flex-column p-4 justify-content-between">
                 <div>
                     <h5 className="fw-bold mb-2 text-dark">{product.name}</h5>

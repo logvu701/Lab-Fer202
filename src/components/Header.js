@@ -6,7 +6,6 @@ function Header({ cartCount = 0 }) {
     return (
         <Navbar bg="white" expand="lg" className="shadow-sm py-3 sticky-top">
             <Container>
-                {/* Left: Brand Logo */}
                 <Navbar.Brand href="#home" className="d-flex align-items-center">
                     <img 
                         src="img/logo.jpg" 
@@ -18,7 +17,6 @@ function Header({ cartCount = 0 }) {
                 <Navbar.Toggle aria-controls="main-navbar" />
 
                 <Navbar.Collapse id="main-navbar">
-                    {/* Center: Navigation Links */}
                     <Nav className="mx-auto fw-semibold text-uppercase" style={{ gap: "15px" }}>
                         <Nav.Link href="#home" className="text-dark px-3 hover-link">Home</Nav.Link>
                         <Nav.Link href="#products" className="text-dark px-3 hover-link">Products</Nav.Link>
@@ -27,7 +25,6 @@ function Header({ cartCount = 0 }) {
                         <Nav.Link href="#contact" className="text-dark px-3 hover-link">Contact</Nav.Link>
                     </Nav>
 
-                    {/* Far right: Cart Icon with Badge */}
                     <Nav>
                         <Nav.Link 
                             href="#cart" 

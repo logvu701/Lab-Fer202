@@ -13,7 +13,6 @@ code {
     monospace;
 }
 
-/* Card Hover Zoom and Shadow Transition Page Elements */
 .product-card {
   transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
 }
@@ -31,7 +30,6 @@ code {
   transform: scale(1.06);
 }
 
-/* Elegant Text link Hover Underlining Animation */
 .hover-link {
   position: relative;
 }

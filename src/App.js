@@ -73,17 +73,14 @@ function App() {
         const product = products.find(p => p.id === productId);
         if (!product || product.stock <= 0) return;
 
-        // Update product stock
         setProducts(prevProducts =>
             prevProducts.map(p =>
                 p.id === productId ? { ...p, stock: p.stock - 1 } : p
             )
         );
 
-        // Update cart quantity
         setCartCount(prevCount => prevCount + 1);
 
-        // Show toast
         setToastMessage(`Sản phẩm "${product.name}" đã được thêm vào giỏ hàng thành công!`);
         setShowToast(true);
     };
@@ -95,7 +92,7 @@ function App() {
             <main className="container my-5" style={{ flex: 1 }}>
                 <h2 className="text-center mb-5 fw-bold text-dark position-relative py-2">
                     FEATURED PRODUCTS
-                    <span 
+                    <span
                         style={{
                             position: "absolute",
                             bottom: 0,
@@ -111,22 +108,21 @@ function App() {
             </main>
             <Footer />
 
-            {/* Notification Toast */}
             <ToastContainer position="top-end" className="p-3" style={{ position: "fixed", zIndex: 9999, top: "80px" }}>
-                <Toast 
-                    onClose={() => setShowToast(false)} 
-                    show={showToast} 
-                    delay={3000} 
-                    autohide 
+                <Toast
+                    onClose={() => setShowToast(false)}
+                    show={showToast}
+                    delay={3000}
+                    autohide
                     style={{
-                        backgroundColor: "#198754", 
+                        backgroundColor: "#198754",
                         color: "#fff",
                         borderRadius: "8px",
                         boxShadow: "0 0.5rem 1rem rgba(0, 0, 0, 0.15)"
                     }}
                 >
                     <Toast.Header closeButton={true} className="bg-success text-white border-0 py-2">
-                        <strong className="me-auto">🛍️ Giỏ hàng</strong>
+                        <strong className="me-auto"> Giỏ hàng</strong>
                         <small className="text-white-50">vừa xong</small>
                     </Toast.Header>
                     <Toast.Body className="py-3 px-3 fw-medium">
