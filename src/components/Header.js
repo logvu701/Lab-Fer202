@@ -2,7 +2,7 @@ import React from "react";
 import { Navbar, Container, Nav, Badge } from "react-bootstrap";
 import { FaShoppingCart } from "react-icons/fa";
 
-function Header({ cartCount = 0 }) {
+function Header() {
     return (
         <Navbar bg="white" expand="lg" className="shadow-sm py-3 sticky-top">
             <Container>
@@ -43,7 +43,7 @@ function Header({ cartCount = 0 }) {
                                     boxShadow: "0 2px 4px rgba(0,0,0,0.15)"
                                 }}
                             >
-                                {cartCount}
+                                0
                             </Badge>
                         </Nav.Link>
                     </Nav>

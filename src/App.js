@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import Header from "./components/Header";
 import HeroBanner from "./components/HeroBanner";
 import ProductList from "./components/ProductList";
 import Footer from "./components/Footer";
-import Toast from "react-bootstrap/Toast";
-import ToastContainer from "react-bootstrap/ToastContainer";
 
 const initialProducts = [
     {
@@ -64,30 +62,9 @@ const initialProducts = [
 ];
 
 function App() {
-    const [products, setProducts] = useState(initialProducts);
-    const [cartCount, setCartCount] = useState(0);
-    const [showToast, setShowToast] = useState(false);
-    const [toastMessage, setToastMessage] = useState("");
-
-    const handleAddToCart = (productId) => {
-        const product = products.find(p => p.id === productId);
-        if (!product || product.stock <= 0) return;
-
-        setProducts(prevProducts =>
-            prevProducts.map(p =>
-                p.id === productId ? { ...p, stock: p.stock - 1 } : p
-            )
-        );
-
-        setCartCount(prevCount => prevCount + 1);
-
-        setToastMessage(`Sản phẩm "${product.name}" đã được thêm vào giỏ hàng thành công!`);
-        setShowToast(true);
-    };
-
     return (
         <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", paddingBottom: "100px" }}>
-            <Header cartCount={cartCount} />
+            <Header />
             <HeroBanner />
             <main className="container my-5" style={{ flex: 1 }}>
                 <h2 className="text-center mb-5 fw-bold text-dark position-relative py-2">
@@ -104,32 +81,9 @@ function App() {
                         }}
                     ></span>
                 </h2>
-                <ProductList products={products} onAddToCart={handleAddToCart} />
+                <ProductList products={initialProducts} />
             </main>
             <Footer />
-
-            <ToastContainer position="top-end" className="p-3" style={{ position: "fixed", zIndex: 9999, top: "80px" }}>
-                <Toast
-                    onClose={() => setShowToast(false)}
-                    show={showToast}
-                    delay={3000}
-                    autohide
-                    style={{
-                        backgroundColor: "#198754",
-                        color: "#fff",
-                        borderRadius: "8px",
-                        boxShadow: "0 0.5rem 1rem rgba(0, 0, 0, 0.15)"
-                    }}
-                >
-                    <Toast.Header closeButton={true} className="bg-success text-white border-0 py-2">
-                        <strong className="me-auto"> Giỏ hàng</strong>
-                        <small className="text-white-50">vừa xong</small>
-                    </Toast.Header>
-                    <Toast.Body className="py-3 px-3 fw-medium">
-                        {toastMessage}
-                    </Toast.Body>
-                </Toast>
-            </ToastContainer>
         </div>
     );
 }

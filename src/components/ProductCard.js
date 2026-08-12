@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Button, Badge } from "react-bootstrap";
 
-function ProductCard({ product, onAddToCart }) {
+function ProductCard({ product }) {
     const getStatusColor = (status) => {
         switch (status) {
             case "Còn hàng":
@@ -74,7 +74,6 @@ function ProductCard({ product, onAddToCart }) {
                 <div className="d-grid gap-2 mt-3">
                     <Button 
                         variant={isOutOfStock ? "secondary" : "primary"}
-                        onClick={() => onAddToCart(product.id)}
                         disabled={isOutOfStock}
                         className="py-2.5 fw-bold shadow-sm rounded"
                         style={{
