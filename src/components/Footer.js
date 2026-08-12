@@ -3,9 +3,9 @@ import { Container, Row, Col } from "react-bootstrap";
 
 function Footer() {
     return (
-        <footer 
-            className="fixed-bottom bg-light border-top py-3 text-secondary" 
-            style={{ 
+        <footer
+            className="fixed-bottom bg-light border-top py-3 text-secondary"
+            style={{
                 zIndex: 1030,
                 boxShadow: "0 -2px 10px rgba(0, 0, 0, 0.05)"
             }}
@@ -18,13 +18,13 @@ function Footer() {
                     <Col md={6} className="text-md-end mt-2 mt-md-0">
                         <ul className="list-inline mb-0" style={{ fontSize: "0.9rem" }}>
                             <li className="list-inline-item me-3">
-                                <strong>Student Name:</strong> Đàm Lâm Oanh
+                                <strong>Student Name:</strong> Đàm Thận Long VŨ
                             </li>
                             <li className="list-inline-item me-3">
                                 <strong>Student ID:</strong> HE190770
                             </li>
                             <li className="list-inline-item me-3">
-                                <strong>Class Name:</strong> IA1808
+                                <strong>Class Name:</strong> HHsa
                             </li>
                             <li className="list-inline-item">
                                 <strong>Email Address:</strong> oanhdlhhe190770@fpt.edu.vn
