@@ -38,6 +38,13 @@ function AttendanceClass() {
     const subjectRef = useRef();
     const lecturerRef = useRef();
 
+    const totalPresent = useMemo(() => students.filter((c) => c.status === "PRESENT").length, [students]);
+    const totalAbsent = useMemo(() => students.filter((c) => c.status === "ABSENT").length, [students]);
+    const attendanceRate = useMemo(() => {
+        const total = students.length;
+        return total === 0 ? "0" : ((totalPresent / total) * 100).toFixed(0);
+    }, [students, totalPresent]);
+
     const filteredAndSortedClasses = useMemo(() => {
         let result = [...students];
 
@@ -70,7 +77,7 @@ function AttendanceClass() {
 
     const handleDelete = useCallback((id) => {
         if (window.confirm("Bạn có chắc chắn muốn xóa sinh viên này không?")) {
-            dispatch({ type: "DELETE_CLASS", payload: id });
+            dispatch({ type: "DELETE_STUDENT", payload: id });
             setEditingClass((prev) => (prev && prev.id === id ? null : prev));
         }
     }, []);
@@ -138,8 +145,8 @@ function AttendanceClass() {
                             style={{ fontSize: "15px", borderColor: "#dee2e6" }}
                         >
                             <option value="ALL">Tất cả Trạng thái</option>
-                            <option value="OPEN">Có mặt (PRESENT)</option>
-                            <option value="CLOSED">Vắng mặt (ABSENT)</option>
+                            <option value="PRESENT">Có mặt (PRESENT)</option>
+                            <option value="ABSENT">Vắng mặt (ABSENT)</option>
                         </Form.Select>
                     </Col>
                     <Col xs={12} sm={6} md={1} className="d-flex align-items-stretch">
@@ -157,8 +164,8 @@ function AttendanceClass() {
 
             <div className="mb-3 text-start d-flex justify-content-between align-items-center">
                 <span className="fs-6 fw-normal">
-                    Tổng số bản ghi: <strong>{filteredAndSortedClasses.length}</strong> Có mặt <strong>{filteredAndSortedClasses.status}</strong> Vắng
-                    mặt <strong></strong> Tỷ lệ đi học: <strong></strong>
+                    Tổng số bản ghi: <strong>{filteredAndSortedClasses.length}</strong> Có mặt <strong>{totalPresent}</strong> Vắng
+                    mặt <strong>{totalAbsent}</strong> Tỷ lệ đi học: <strong>{attendanceRate}%</strong>
                 </span>
             </div>
 
@@ -199,10 +206,18 @@ function AttendanceClass() {
                             filteredAndSortedClasses.map((cls, index) => (
                                 <tr key={cls.id} className={darkMode ? "text-white" : "text-dark"}>
                                     <td className="px-3 py-3 fw-normal">{index + 1}</td>
-                                    <td className="px-3 py-3 fw-bold text-uppercase">{cls.ClassId}</td>
+                                    <td className="px-3 py-3 fw-bold text-uppercase">{cls.classId}</td>
                                     <td className="px-3 py-3">{cls.name}</td>
                                     <td className="px-3 py-3">{cls.date}</td>
-                                    <td className="px-3 py-3">{cls.status}</td>
+                                    <td className="px-3 py-3">
+                                        <span
+                                            onClick={() => handleToggleStatus(cls.id)}
+                                            className={`badge py-1 px-2 rounded-2 fw-medium ${cls.status === "PRESENT" ? "bg-success" : "bg-danger"}`}
+                                            style={{ cursor: "pointer", display: "inline-block", fontSize: "14px" }}
+                                        >
+                                            {cls.status}
+                                        </span>
+                                    </td>
                                     <td className="px-3 py-3 text-center">
                                         <div className="d-flex justify-content-center gap-2">
                                             <button
