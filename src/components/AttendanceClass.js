@@ -17,6 +17,16 @@ const classReducer = (state, action) => {
     }
 };
 
+const formatDate = (dateString) => {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) return dateString;
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+};
+
 function AttendanceClass() {
     const [darkMode, setDarkMode] = useLocalStorage("darkMode", false);
 
@@ -208,7 +218,7 @@ function AttendanceClass() {
                                     <td className="px-3 py-3 fw-normal">{index + 1}</td>
                                     <td className="px-3 py-3 fw-bold text-uppercase">{cls.classId}</td>
                                     <td className="px-3 py-3">{cls.name}</td>
-                                    <td className="px-3 py-3">{cls.date}</td>
+                                    <td className="px-3 py-3">{formatDate(cls.date)}</td>
                                     <td className="px-3 py-3">
                                         <span
                                             onClick={() => handleToggleStatus(cls.id)}
